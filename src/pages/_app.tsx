@@ -1,4 +1,4 @@
-import Providers from '@/Providers/Providers'
+import Providers from '@/components/Providers/Providers'
 import type { AppProps } from 'next/app'
 import NProgress from 'nprogress'
 import Router from 'next/router'

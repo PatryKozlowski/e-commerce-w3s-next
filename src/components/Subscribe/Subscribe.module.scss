@@ -1,3 +1,6 @@
+@import '../../styles/mixins.scss';
+@import '../../styles/vars.scss';
+
 .container {
     display: flex;
     flex-direction: column;
@@ -37,9 +40,10 @@
     margin: 0.75rem 0;
 
     .btn {
+        border: none;
         padding: 0.68rem;
-        background-color: rgb(239 68 68);
-        transition: all ease-in-out 500ms;
+        background-color: $error;
+        @include hoverAnimation;
         color: white;
         cursor: pointer;
 

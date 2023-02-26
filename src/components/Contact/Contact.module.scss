@@ -100,16 +100,13 @@
 }
 
 .social_wrapper {
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
     font-size: 1.125rem;
     line-height: 1.75rem;
-
-    svg {
-        margin: 0.5rem 0.75rem 0.5rem 0;
-    }
+    gap: 1rem;
 
     .link {
-        margin: 1rem 0;
         transition: all ease-in-out 300ms;
         cursor: pointer;
 

@@ -14,7 +14,7 @@ const Footer = (): JSX.Element => {
         </Link>
         <Link
           className={styles.sublink}
-          href={'https://github.com/PatryKozlowski/e-shop-w3s'}
+          href={'https://github.com/PatryKozlowski/e-commerce-w3s-next'}
           target={'_blank'}
         >
           Refactoring Patryk Kozłowski

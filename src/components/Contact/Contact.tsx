@@ -28,12 +28,12 @@ const Contact = (): JSX.Element => {
   ]
 
   const socialItems = [
-    { icon: <FaFacebookSquare />, href: 'https://github.com/PatryKozlowski' },
-    { icon: <FaInstagram />, href: 'https://github.com/PatryKozlowski' },
-    { icon: <FaSnapchatSquare />, href: 'https://github.com/PatryKozlowski' },
-    { icon: <FaPinterestP />, href: 'https://github.com/PatryKozlowski' },
-    { icon: <FaLinkedin />, href: 'https://github.com/PatryKozlowski' },
-    { icon: <FaTwitter />, href: 'https://github.com/PatryKozlowski' }
+    { icon: <FaFacebookSquare />, href: 'https://github.com/PatryKozlowski/e-commerce-w3s-next' },
+    { icon: <FaInstagram />, href: 'https://github.com/PatryKozlowski/e-commerce-w3s-next' },
+    { icon: <FaSnapchatSquare />, href: 'https://github.com/PatryKozlowski/e-commerce-w3s-next' },
+    { icon: <FaPinterestP />, href: 'https://github.com/PatryKozlowski/e-commerce-w3s-next' },
+    { icon: <FaLinkedin />, href: 'https://github.com/PatryKozlowski/e-commerce-w3s-next' },
+    { icon: <FaTwitter />, href: 'https://github.com/PatryKozlowski/e-commerce-w3s-next' }
   ]
 
   const contactInput = [

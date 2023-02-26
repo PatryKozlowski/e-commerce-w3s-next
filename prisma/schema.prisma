@@ -1,0 +1,222 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+
+enum JeansType {
+  normal
+  skinny
+  relaxed
+  bootcut
+  straight
+}
+
+enum ProductInfo {
+  none
+  new
+  sale
+}
+
+enum ProductType {
+  null
+  shirts
+  jackets
+  jeans
+  gymwear
+  blazers
+  shoes
+}
+
+
+model SizeXS {
+  id        String   @id @unique @default(uuid())
+  productId String   @unique
+  size      String   @default("XS")
+  stock     Int      @default(0)
+  product   Products @relation(fields: [productId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now())
+}
+
+model SizeS {
+  id        String   @id @unique @default(uuid())
+  productId String   @unique
+  size      String   @default("S")
+  stock     Int      @default(0)
+  product   Products @relation(fields: [productId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now())
+}
+
+model SizeM {
+  id        String   @id @unique @default(uuid())
+  productId String   @unique
+  size      String   @default("M")
+  stock     Int      @default(0)
+  product   Products @relation(fields: [productId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now())
+}
+
+model SizeL {
+  id        String   @id @unique @default(uuid())
+  productId String   @unique
+  size      String   @default("L")
+  stock     Int      @default(0)
+  product   Products @relation(fields: [productId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now())
+}
+
+model SizeXL {
+  id        String   @id @unique @default(uuid())
+  productId String   @unique
+  size      String   @default("XL")
+  stock     Int      @default(0)
+  product   Products @relation(fields: [productId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now())
+}
+
+model Products {
+  id          String       @id @default(uuid())
+  product     ProductType @default(null)
+  name        String @db.VarChar(29)
+  description String @db.VarChar(264)
+  image       String
+  price       Float
+  jeansType   JeansType?   @default(normal)
+  info        ProductInfo? @default(none)
+  sizeXS      SizeXS[]
+  sizeS       SizeS[]
+  sizeM       SizeM[]
+  sizeL       SizeL[]
+  sizeXL      SizeXL[]
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @default(now())
+
+  @@unique([id])
+}
+
+
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String? @db.Text
+  access_token      String? @db.Text
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String? @db.Text
+  session_state     String?
+  blocked           Boolean @default(false)       
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model User {
+  id               String        @id @default(cuid())
+  name             String?
+  email            String?       @unique
+  password         String?
+  emailVerified    DateTime?
+  image            String?
+  stripeCustomerId String?       @unique
+  role             Role          @default(user)
+  address          UsersAdress[]
+  orders           UsersOrders[]
+  accounts         Account[]
+  sessions         Session[]
+  createdAt DateTime    @default(now())
+  updatedAt DateTime     @default(now())
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+}
+
+enum Role {
+  admin
+  user
+}
+
+enum OrderStatus {
+  Open
+  Confirmed
+  Completed
+  Cancelled
+}
+
+enum PaymentStatus {
+  Unpaid
+  Failed
+  Paid
+}
+
+enum DeliveryStatus {
+  Unfulfilled
+  Shipping
+  Shipped
+  Arrived
+}
+
+model UsersAdress {
+  id          String   @id @default(cuid())
+  userId      String   @unique
+  name        String
+  street      String
+  city        String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @default(now())
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model UsersOrders {
+  id        String         @id @default(cuid())
+  userId    String
+  sessionId String         @unique
+  status    OrderStatus    @default(Open)
+  payment   PaymentStatus  @default(Unpaid)
+  delivery  DeliveryStatus @default(Unfulfilled)
+  createdAt DateTime       @default(now())
+  updatedAt DateTime       @default(now())
+  cart      UsersCart[]
+  user      User           @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model UsersCart {
+  id        String        @id @default(cuid())
+  userId    String
+  sessionId String        @unique
+  productId String[]
+  image     String[]
+  size      String[]
+  order     UsersOrders[]
+  createdAt DateTime?     @default(now())
+  updatedAt DateTime?     @default(now())
+}

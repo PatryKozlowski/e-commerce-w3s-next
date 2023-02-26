@@ -1,0 +1,136 @@
+@import '../../styles//mixins.scss';
+@import '../../styles/vars.scss';
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 50vh;
+}
+
+.form_wrapper {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.text_wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 12rem 0 1rem 0;
+    @include desktop {
+        margin: 0 0 1rem 0;
+    }
+
+    p {
+        font-size: 1.875rem;
+        line-height: 2.25rem;
+        font-weight: 200;
+    }
+
+    svg {
+        margin: 0 1rem 0 0;
+    }
+}
+
+.input_wrapper {
+    width: 83.333333%;
+    @include desktop {
+        width: 50%;
+    }
+    display: flex;
+    flex-direction: column;
+
+    div {
+        margin: 0.5rem 0
+    }
+
+    input {
+        padding: 1rem;
+        outline: none;
+    }
+}
+
+.input_password {
+    border: none;
+    width: 100%;
+}
+
+.input_container {
+    display: flex;
+    align-items: center;
+    border: 1px solid black;
+}
+
+.input_error_container {
+    display: flex;
+    align-items: center;
+    border: 1px solid $error;
+
+    input {
+        margin: 0;
+    }
+
+    &:focus {
+        outline-color: $error;
+    }
+}
+
+.auth_btn {
+    display: flex;
+    align-items: center;
+    border: none;
+    justify-content: center;
+    padding: 0.5rem;
+    margin: 0.5rem 0 0 0;
+    width: 83.333333%;
+    height: 3rem;
+    @include desktop {
+        width: 50%;
+    }
+    background-color: rgba(148, 163, 184, 0.579);
+    @include hoverAnimation;
+    cursor: pointer;
+
+    svg {
+        margin: 0 0 0 0.5rem;
+    }
+
+    &:hover {
+        background-color: rgba(100, 116, 139, 0.579);
+    }
+}
+
+.google_auth_btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    background-color: transparent;
+    width: 50%;
+    padding: 0.5rem;
+    margin: 1rem 0 0 0;
+    @include hoverAnimation;
+    cursor: pointer;
+
+    &:hover {
+        box-shadow: rgba(0, 0, 0, 0.04) 0px 3px 5px;
+    }
+}
+
+.links_wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .link {
+        font-size: 0.875rem;
+        line-height: 1.25rem;
+        text-decoration-line: underline;
+        margin: 1rem 0 0 0;
+    }
+}

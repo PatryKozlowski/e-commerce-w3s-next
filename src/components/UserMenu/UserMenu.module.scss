@@ -1,4 +1,5 @@
 @import '../../styles/mixins.scss';
+@import '../../styles/vars.scss';
 
 .container {
     position: fixed;
@@ -67,8 +68,6 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    // border-top: 1px solid white;
-    // border-bottom: 1px solid white;
 }
 
 .link {
@@ -84,7 +83,9 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    color: white;
+    color: $violet;
+    border: none;
+    background-color: transparent;
     cursor: pointer;
 
     svg {

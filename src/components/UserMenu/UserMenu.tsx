@@ -68,7 +68,7 @@ const UserMenu = (): JSX.Element => {
           onClick={async () => await signOut()}
         >
           Log out
-          <BiLogOut size={30}/>
+          <BiLogOut size={22}/>
         </button>
       </div>
     </div>
