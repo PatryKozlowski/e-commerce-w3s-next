@@ -1,0 +1,33 @@
+@import '../../styles//mixins.scss';
+
+.wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    background-color: black;
+    padding: 0.5rem 0;
+    margin: 0 0.25rem 0 0;
+    width: 100%;
+    @include desktop {
+        width: 59.375rem;
+        margin-left: auto;
+    }
+
+    a {
+        color: white;
+    }
+
+    .link {
+        margin: 0.5rem 0;
+    }
+
+    .sublink {
+        font-size: 0.75rem;
+        line-height: 1rem;
+
+        &:hover {
+            text-decoration-line: underline;
+        }
+    }
+}

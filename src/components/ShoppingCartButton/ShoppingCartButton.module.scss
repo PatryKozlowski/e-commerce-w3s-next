@@ -1,0 +1,25 @@
+@import '../../styles/mixins.scss';
+
+.container {
+    position: relative;
+    @include hoverAnimation;
+    cursor: pointer;
+
+    &:hover {
+        transform: scale(1.1);
+    }
+}
+
+.wrapper {
+    position: absolute;
+    bottom: 1.5rem;
+    left: 0.625rem;
+    @include desktop {
+        left: -0.3125rem;
+    }
+}
+
+.text {
+    font-size: 1.125rem;
+    line-height: 1.75rem;
+}

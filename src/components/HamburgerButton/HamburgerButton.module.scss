@@ -1,0 +1,10 @@
+@import '../../styles/mixins.scss';
+
+.hambuerger_btn {
+    cursor: pointer;
+    @include hoverAnimation;
+
+    &:hover {
+        transform: scale(1.1);
+    }
+}

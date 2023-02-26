@@ -1,0 +1,65 @@
+@import '../../styles/mixins.scss';
+
+.container {
+    width: 100%;
+    border: solid 1px black;
+    display: flex;
+    align-items: center;
+}
+
+.input {
+    padding: 0.5rem;
+    border: none;
+    opacity: 1;
+
+    &:focus {
+        outline: none;
+    }
+}
+
+.icon_input {
+    display: flex;
+    align-items: center;
+}
+
+.password_btn {
+    margin: 0 0.5rem 0 0;
+    @include hoverAnimation;
+    cursor: pointer;
+
+    &:hover {
+        transform: scale(1.05);
+    }
+}
+
+.search_icon {
+    z-index: 999;
+    @include hoverAnimation;
+    cursor: pointer;
+
+    &:hover {
+        transform: scale(1.1);
+    }
+}
+
+.error {
+    margin: 0 0 0.5rem 0;
+    border: solid 1px rgb(239 68 68);
+    
+    &:focus {
+        outline-color: rgb(239 68 68);;
+    }
+}
+
+.text_error {
+    display: flex;
+    align-items: center;
+    color: rgb(239 68 68);
+    font-size: 0.75rem;
+    line-height: 1rem;
+    font-weight: 400;
+
+    svg {
+        margin: 0 0.5rem 0 0;
+    }
+}

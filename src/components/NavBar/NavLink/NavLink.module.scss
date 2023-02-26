@@ -1,0 +1,11 @@
+@import '../../../styles/vars.scss';
+@import '../../../styles/mixins.scss';
+.nav_link {
+    padding: 0.5rem 1rem;
+    @include hoverAnimation;
+    color: $primary-text-color;
+    
+    &:hover {
+        background-color: $primary-bg-color;
+    }
+}

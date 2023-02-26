@@ -1,0 +1,120 @@
+@import '../../styles/mixins.scss'; 
+
+.container {
+    display: flex;
+    flex-basis: 33.333333%;
+    text-align: center;
+    padding: 4rem 0;
+    background-color: rgb(229 231 235);
+}
+
+.contact_wrapper {
+    padding: 0 1rem;
+    display: flex;
+    flex-direction: column;
+    font-size: 0.75rem;
+    line-height: 1rem;
+    width: 33.333333%;
+
+    input {
+        padding: 0.5rem;
+        opacity: 1;
+        margin: 1rem 0;
+    }
+    
+    .subtitle {
+        margin: 0.75rem 0;
+    }
+
+    .btn {
+        padding: 0.5rem 1rem;
+        background-color: black;
+        color: white;
+        transition: all ease-in-out 700ms;
+        cursor: pointer;
+
+        &:hover {
+            background-color: rgb(156 163 175);
+            color: black;
+        }
+    }
+}
+
+.title {
+    margin: 0.5rem 0;
+    font-size: 1.25rem;
+    line-height: 1.75rem;
+}
+
+.about_wrapper {
+    font-size: 0.75rem;
+    line-height: 1rem;
+    margin: 0 0.5rem;
+    width: 33.333333%;
+
+    .links_wrapper {
+        display: flex;
+        flex-direction: column;
+
+        a {
+            text-decoration-line: underline;
+            margin: 0.65rem 0;
+        }
+    }
+}
+
+.store_wrapper {
+    font-size: 0.75rem;
+    line-height: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    @include desktop {
+        width: 33.333333%;
+    }
+
+    .wrapper {
+        display: flex;
+        align-items: flex-start;
+        flex-direction: column;
+    }
+}
+
+.icon_wrapper {
+    display: flex;
+    align-items: center;
+    
+    svg {
+        margin: 0.5rem 0.75rem 0.5rem 0;
+    }
+}
+
+.payment_wrapper {
+    display: flex;
+    flex-direction: column;
+    margin: 0.75rem 0;
+
+    .title {
+        text-align: left;
+    }
+}
+
+.social_wrapper {
+    display: flex;
+    font-size: 1.125rem;
+    line-height: 1.75rem;
+
+    svg {
+        margin: 0.5rem 0.75rem 0.5rem 0;
+    }
+
+    .link {
+        margin: 1rem 0;
+        transition: all ease-in-out 300ms;
+        cursor: pointer;
+
+        &:hover {
+            transform: scale(1.25);
+        }
+    }
+}

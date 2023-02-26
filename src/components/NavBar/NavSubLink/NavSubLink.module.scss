@@ -1,0 +1,33 @@
+@import '../../../styles/vars.scss';
+@import '../../../styles/mixins.scss';
+
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    font-size: 0.9375rem;
+}
+
+.nav_link {
+    display: flex;
+    align-items: center;
+    padding: 0.5rem 1rem;
+    @include hoverAnimation;
+    color: $primary-text-color;
+    cursor: pointer;
+
+    a {
+        color: $primary-text-color;
+    }
+    
+    &:hover {
+        background-color: $primary-bg-color;
+    }
+}
+
+.open_sub_menu {
+    font-weight: 700;
+
+    a {
+        color: black;
+    }
+}

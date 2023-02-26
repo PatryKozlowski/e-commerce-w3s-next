@@ -1,0 +1,51 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    padding: 2rem 1rem;
+    background-color: black;
+}
+
+.wrapper {
+    width: 100%;
+    color: white;
+    
+    input {
+        width: 100%;
+        padding: 0.9rem;
+        opacity: 1;
+    }
+}
+
+.input_container {
+    width: 100%;
+    border: solid 1px black;
+    display: flex;
+    align-items: center;
+}
+
+.title {
+    font-size: 2.25rem;
+    line-height: 2.5rem;
+    margin: 0.75rem 0;
+}
+
+.subtitle {
+    margin: 0.75rem 0;
+}
+
+.btn_wrapper {
+    margin: 0.75rem 0;
+
+    .btn {
+        padding: 0.68rem;
+        background-color: rgb(239 68 68);
+        transition: all ease-in-out 500ms;
+        color: white;
+        cursor: pointer;
+
+        &:hover {
+            background-color: rgb(209 213 219);
+            color: black;
+        }
+    }
+}
