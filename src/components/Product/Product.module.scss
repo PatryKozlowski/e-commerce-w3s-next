@@ -1,0 +1,27 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    transition: ease-in-out 300ms;
+
+    .product_info_wrapper {
+        position:relative
+    }
+
+    .wrapper {
+        margin: 1rem 0 0 0;
+
+        .price {
+            margin: 0.5rem 0 0 0;
+            font-weight: 700;
+        }
+    }
+
+    &:hover {
+        transform: scale(1.05);
+    }
+
+    img {
+        width: 100%;
+        height: auto;
+    }
+}

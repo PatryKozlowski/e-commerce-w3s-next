@@ -3,7 +3,7 @@ import Banner from '@/components/Banner/Banner'
 import Contact from '@/components/Contact/Contact'
 import Subscribe from '@/components/Subscribe/Subscribe'
 import Footer from '@/components/Footer/Footer'
-import styles from '../styles/Home.module.scss'
+import Wrapper from '@/components/Wrapper/Wrapper'
 
 export default function Home (): JSX.Element {
   return (
@@ -23,15 +23,15 @@ export default function Home (): JSX.Element {
           href={'/favicon.ico'}
         />
       </Head>
-      <section className={styles.wrapper}>
+      <Wrapper>
         <Banner />
-      </section>
-      <section className={styles.wrapper}>
+      </Wrapper>
+      <Wrapper>
         <Subscribe />
-      </section>
-      <section className={styles.wrapper}>
+      </Wrapper>
+      <Wrapper>
         <Contact />
-      </section>
+      </Wrapper>
       <Footer />
     </>
   )

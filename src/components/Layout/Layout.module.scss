@@ -13,10 +13,3 @@
 .cart_wrapper {
   height: 100%;
 }
-  
-.wrapper {
-  @include desktop {
-      width: 59.375rem;
-      margin: 0 0 0 15.625rem;
-  }
-}

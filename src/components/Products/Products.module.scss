@@ -1,0 +1,24 @@
+@import '../../styles/mixins.scss';
+
+.container {
+    display: flex;
+    flex-direction: column;
+    padding: 0 1rem;
+    @include desktop {
+        padding: 0;
+    }
+}
+
+.title {
+    margin: 1rem 0;
+}
+
+.wrapper {
+    padding: 0 0.5rem;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    @include desktop {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+    gap: 2.25rem;
+}

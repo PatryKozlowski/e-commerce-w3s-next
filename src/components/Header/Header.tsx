@@ -15,36 +15,27 @@ const Header = (): JSX.Element => {
   const router = useRouter()
   const pathName = router.pathname
 
-  const routes: string[] = [
-    '', 'login', 'register',
-    'profile', 'user', 'success',
-    'orders', 'admin', 'create'
+  const searchEnabledRoutes: string[] = [
+    'blazers', 'gymwear', 'jackets', 'jeans', 'bootcut', 'skinny', 'straight', 'relaxed', 'shirts', 'shoes'
   ]
 
   const registeredSearch = register('search')
 
   const search = watch('search')
-  const checkingRoute = useCallback((routeArray: string[], route: string): boolean => {
-    const path = route.split('/')
-    if (path.length > 2) {
-      return true
-    } else {
-      return routeArray.includes(path[1])
-    }
-  }, [])
 
   const getTitle = useCallback((pathName: string) => {
     const pageName = pathName.split('/')
+    console.log(pageName[1]?.charAt(0).toUpperCase() + pageName[1]?.slice(1))
     if (pageName.length === 2) {
       return pageName[1]?.charAt(0).toUpperCase() + pageName[1]?.slice(1)
     }
     if (pageName.length === 3) {
-      return ''
+      return pageName[2]?.charAt(0).toUpperCase() + pageName[2]?.slice(1)
     }
   }, [])
 
-  const isSearchEnable = checkingRoute(routes, pathName)
-  const isTitleEnable = checkingRoute(routes, pathName)
+  const isSearchEnable = (searchEnabledRoutes.includes(pathName.split('/')[1]) && pathName.split('/').length <= 3) || (searchEnabledRoutes.includes(pathName.split('/')[3]) && pathName.split('/').length <= 3)
+  const isTitleEnable = isSearchEnable
 
   useEffect(() => {
     dispatch(handleSearch(search))
@@ -52,16 +43,16 @@ const Header = (): JSX.Element => {
 
   return (
     <header className={styles.container}>
-      <div className={`${isTitleEnable ? styles.wrapper_end : styles.wrapper}`}>
+      <div className={`${isTitleEnable ? styles.wrapper : styles.wrapper_end}`}>
         {
-            !isTitleEnable ?
+            isTitleEnable ?
               <p className={styles.header_title}>{getTitle(pathName)}</p>
               :
               null
         }
         <div className={styles.content}>
           {
-            !isSearchEnable ?
+            isSearchEnable ?
               <Input
                 containerStyle={styles.input_container}
                 search
@@ -71,7 +62,7 @@ const Header = (): JSX.Element => {
               />
               :
               null
-            }
+          }
           <AccountButton />
           <ShoppingCartButton />
         </div>

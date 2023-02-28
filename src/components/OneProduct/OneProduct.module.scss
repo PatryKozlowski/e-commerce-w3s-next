@@ -1,0 +1,88 @@
+@import '../../styles/mixins.scss';
+@import '../../styles/vars.scss';
+
+.container {
+    display: grid;
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+    @include desktop {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    gap: 2.25rem;
+    padding: 1rem;
+
+    img {
+        width: 100%;
+        height: auto;
+    }
+}
+
+.wrapper {
+    display: flex;
+    flex-direction: column;
+
+    h3, h4 {
+       margin: 0.5rem 0 0 0;
+       @include desktop {
+        margin: 2.5rem 0 0 0;
+       }
+       font-weight: 700;
+    }
+
+    .description {
+        margin: 1rem 0 0 0;
+        font-size: 0.8rem;
+        line-height: 1.5rem;
+        height: 7.5rem;
+     }
+ 
+     .title {
+         font-size: 1.5rem;
+         line-height: 2rem;
+         font-weight: 400;
+         margin: 0 0 1rem 0;
+     }
+}
+
+.form_wrapper_all_sizes {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.form_wrapper {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.button_wrapper {
+    border: solid 1px black;
+    width: 100%;
+    padding: 1.5rem;
+    cursor: pointer;
+    @include hoverAnimation;
+    @include desktop {
+        margin: 3rem 0 0 0;
+    }
+
+    &:hover {
+        color: $third-tex-color;
+        font-weight: 600;
+        background-color: $secondary-text-color;
+    }
+}
+
+.btn_add_cart {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+
+    span {
+        font-weight: 600;
+        margin: 0 0.5rem;
+    }
+}

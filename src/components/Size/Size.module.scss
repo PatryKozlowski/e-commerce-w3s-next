@@ -1,0 +1,50 @@
+@import '../../styles/mixins.scss';
+@import '../../styles/vars.scss';
+
+.container {
+    margin: 0 1rem 0 0;
+
+    .wrapper {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: center;
+        margin: 0.25rem 0;
+
+        input {
+            appearance: none;
+            &:checked + p {
+                border-color: $violet;
+                color: $violet;
+                font-weight: 600;
+            }
+        }
+
+        span {
+            margin: 1rem auto;
+        }
+    }
+
+    .size {
+        width: 3.125rem;
+        height: 3.125rem;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        border: solid 1px black;
+        text-align: center;
+        @include hoverAnimation;
+        cursor: pointer;
+
+        &:hover {
+            color: $third-tex-color;
+            background-color: rgb(243 244 246);
+            transform: scale(1.05);
+        }
+    }
+
+    span {
+        margin: 0.7rem 0 0 0;
+    }
+}
