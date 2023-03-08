@@ -24,7 +24,7 @@ const StraightPage = ({ products }: ProductsProps): JSX.Element => {
       </Head>
       {
         !products.length ?
-          <NoProduct />
+          <NoProduct productPage/>
           :
           <Wrapper>
             <Products

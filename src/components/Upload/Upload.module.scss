@@ -1,0 +1,84 @@
+@import '../../styles/mixins.scss';
+@import '../../styles/vars.scss';
+
+.container {
+    margin: 0 0 2rem 0;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.file_wrapper {
+    position: absolute;
+    top: -0.75rem;
+    right: -0.75rem;
+
+    button {
+        cursor: pointer;
+        background-color: transparent;
+    }
+}
+
+.checked {
+    color: $success;
+}
+
+.img_wrapper {
+    width: 100%;
+    height: auto;
+}
+
+.drag_and_drop {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    cursor: pointer;
+
+    .p {
+        margin: 0.5rem 0;
+        text-align: center;
+    }
+
+    .subtitle_drag {
+        display: none;
+        @include mobile {
+            display: block;
+        }
+    }
+
+    .subtitle_choose {
+        display: block;
+        @include mobile {
+            display: none;
+        }
+    }
+}
+
+.btn_no_file {
+    @include hoverAnimation;
+
+    &:hover {
+        transform: scale(1.25);
+    }
+}
+
+.success {
+    color: $success;
+    cursor: none;
+}
+
+.animate_bounce {
+    animation: bounce 1s infinite;
+}
+
+@keyframes bounce {
+    0%, 100% {
+        transform: translateY(-25%);
+        animation-timing-function: cubic-bezier(0.8,0,1,1);
+    }
+    50% {
+        transform: none;
+        animation-timing-function: cubic-bezier(0,0,0.2,1);
+    }
+}

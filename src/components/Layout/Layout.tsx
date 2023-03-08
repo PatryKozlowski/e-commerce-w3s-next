@@ -4,6 +4,7 @@ import type { LayoutProps } from './types'
 import Logo from '../Logo/Logo'
 import Header from '../Header/Header'
 import UserMenu from '../UserMenu/UserMenu'
+import Cart from '../Cart/Cart'
 import styles from './Layout.module.scss'
 
 const Layout = ({ children }: LayoutProps): JSX.Element => {
@@ -19,9 +20,9 @@ const Layout = ({ children }: LayoutProps): JSX.Element => {
       <UserMenu />
 
       {/* Cart */}
-      {/* <div className={styles.cart_wrapper}>
+      <div className={styles.cart_wrapper}>
         <Cart />
-      </div> */}
+      </div>
       <>
         {children}
       </>

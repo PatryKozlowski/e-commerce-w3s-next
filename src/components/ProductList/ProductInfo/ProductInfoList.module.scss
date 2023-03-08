@@ -1,0 +1,16 @@
+@import '../../../styles/vars.scss';
+
+.container {
+    display: flex;
+    column-gap: 0.5rem;
+    border-bottom: 1px solid $violet;
+
+    p {
+        width: 50%;
+        padding: 0.125rem;
+    }
+}
+
+.name_paragraph {
+    font-weight: 700;
+}

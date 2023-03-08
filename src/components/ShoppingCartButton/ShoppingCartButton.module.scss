@@ -1,4 +1,5 @@
 @import '../../styles/mixins.scss';
+@import '../../styles/vars.scss';
 
 .container {
     position: relative;
@@ -17,9 +18,32 @@
     @include desktop {
         left: -0.3125rem;
     }
+
+    span {
+        display: block
+    }
 }
 
 .text {
+    @include hoverAnimation;
     font-size: 1.125rem;
     line-height: 1.75rem;
+    color: black;
+}
+
+.is_animated {
+    color: $violet;
+    transform: scale(1.45);
+}
+
+.is_animated_shopping_cart {
+    color: $violet;
+}
+
+.is_not_animated_shopping_cart {
+    @include desktop {
+        color: black;
+    }
+
+    color: white;
 }

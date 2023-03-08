@@ -1,0 +1,132 @@
+@import '../../styles/mixins.scss';
+@import '../../styles/vars.scss';
+
+.form_wrapper {
+    padding: 1rem;
+    
+    h2 {
+        font-size: 1.5rem;
+        line-height: 2rem;
+        margin: 0 0 1rem 0;
+        border-bottom: 2px solid black;
+        padding: 0 0 0 1rem;
+        @include desktop {
+            padding: 0;
+        }
+    }
+}
+
+.grid_wrapper {
+    display: grid;
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+    @include desktop {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    gap: 2.25rem;
+    margin: 1rem 0;
+    padding: 0 1rem;
+    @include desktop {
+        padding: 0;
+    }
+}
+
+.product_wrapper {
+    display: flex;
+    flex-direction: column;
+}
+
+.title {
+    font-weight: 700;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    margin: 0 0 1rem 0;
+}
+
+.sizes_wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .wrapper {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    input {
+        width: 3rem;
+        height: 3rem;
+        padding: 0.25rem;
+        text-align: center;
+    }
+}
+
+.input_wrapper {
+    display: flex;
+    flex-direction: column;
+
+    span {
+        margin: 0.5rem 0 0 0;
+        text-align: right;
+        font-size: 0.7rem;
+    }
+
+    input {
+        padding: 0.5rem;
+    }
+}
+
+.textarea {
+    resize: none;
+    padding: 0.25rem;
+    height: 9.375rem;
+}
+
+.product_price {
+    display: flex;
+    flex-direction: column;
+    width: 25%;
+    margin: 1rem 0 0 0;
+
+    input {
+        padding: 0.25rem;
+    }
+}
+
+.select_wrapper {
+    display: flex;
+    margin: 1rem 0 0 0;
+}
+
+.select_margin {
+    margin: 0 0 0 1rem;
+}
+
+.full_width {
+    width: 100%;
+}
+
+.select {
+    width: 100%;
+    padding: 0.25rem;
+}
+
+.add_btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    border: 2px solid black;
+    padding: 1.25rem;
+    margin: 0 1.25rem 0 0;
+    cursor: pointer;
+    @include hoverAnimation;
+
+    &:disabled {
+        opacity: 0.4;
+    }
+
+    &:hover {
+        background-color: $secondary-bg-color;
+    }
+}

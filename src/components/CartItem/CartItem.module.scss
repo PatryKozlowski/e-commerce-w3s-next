@@ -1,0 +1,52 @@
+@import '../../styles/mixins.scss'; 
+@import '../../styles/vars.scss';
+
+.container {
+    position: relative;
+    padding: 1.25rem;
+    margin: 0 0 0.5rem 0;
+    display: flex;
+    border-bottom: 1px solid black;
+    transition: all ease-in-out 400ms;
+    transform: translateX(0);
+}
+
+.hidden {
+    transform: translateX(100%);
+}
+
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    p {
+        margin: 0 0 0 1rem;
+    }
+}
+
+.total {
+    font-weight: 600;
+}
+
+.delete_btn {
+    position: absolute;
+    top: 5.25rem;
+    @include desktop {
+        top: 1.25rem;
+    }
+    right: 1.25rem;
+    width: 2.5rem;
+    height: 2.5rem;
+    border: 1px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 9999px;
+    @include hoverAnimation;
+    cursor: pointer;
+
+    &:hover {
+        transform: scale(1.10);
+    }
+}

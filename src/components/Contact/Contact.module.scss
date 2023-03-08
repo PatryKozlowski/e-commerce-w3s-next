@@ -1,11 +1,12 @@
 @import '../../styles/mixins.scss'; 
+@import '../../styles/vars.scss';
 
 .container {
     display: flex;
     flex-basis: 33.333333%;
     text-align: center;
     padding: 4rem 0;
-    background-color: rgb(229 231 235);
+    background-color: $secondary-bg-color;
 }
 
 .contact_wrapper {
@@ -107,7 +108,7 @@
     gap: 1rem;
 
     .link {
-        transition: all ease-in-out 300ms;
+        @include hoverAnimation;
         cursor: pointer;
 
         &:hover {

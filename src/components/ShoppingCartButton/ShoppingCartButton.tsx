@@ -1,11 +1,12 @@
 import { useAppDispatch } from '@/hooks/useAppDispatch'
 import { useAppSelector } from '@/hooks/useAppSelector'
 import { openCart } from '@/redux/cartSlice'
-import { useCallback } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { MdShoppingCart } from 'react-icons/md'
 import styles from './ShoppingCartButton.module.scss'
 
 const ShoppingCartButton = (): JSX.Element => {
+  const [isAnimated, setAnimated] = useState(false)
   const dispatch = useAppDispatch()
   const items = useAppSelector((state) => state.cart.productsInCart)
   const isOpen = useAppSelector((state) => state.cart.isCartOpen)
@@ -14,6 +15,10 @@ const ShoppingCartButton = (): JSX.Element => {
     dispatch(openCart(!isOpen))
   }, [dispatch, isOpen])
 
+  useEffect(() => {
+    setAnimated(true)
+  }, [items])
+
   return (
     <div
       onClick={handleOpenCart}
@@ -21,8 +26,14 @@ const ShoppingCartButton = (): JSX.Element => {
     >
       {
         items ?
-          <div className={styles.wrapper}>
-            <span className={styles.text}>
+          <div
+
+            className={styles.wrapper}
+          >
+            <span
+              onTransitionEnd={() => setAnimated(false)}
+              className={`${styles.text} ${isAnimated ? styles.is_animated : ''}`}
+            >
               {
                 items.length === 0 ?
                   null
@@ -35,7 +46,10 @@ const ShoppingCartButton = (): JSX.Element => {
           null
         }
       <>
-        <MdShoppingCart size={30} />
+        <MdShoppingCart
+          className={`${isAnimated ? styles.is_animated_shopping_cart : styles.is_not_animated_shopping_cart}`}
+          size={30}
+        />
       </>
     </div>
   )

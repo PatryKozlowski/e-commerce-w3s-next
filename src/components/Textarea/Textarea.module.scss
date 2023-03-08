@@ -1,0 +1,18 @@
+@import '../../styles/vars.scss';
+
+.error {
+    outline-color: $error;
+}
+
+.text_error {
+    display: flex;
+    align-items: center;
+    color: $error;
+    font-size: 0.75rem;
+    line-height: 1rem;
+    font-weight: 400;
+
+    svg {
+        margin: 0 0.5rem 0 0;
+    }
+}

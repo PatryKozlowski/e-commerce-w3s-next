@@ -1,0 +1,47 @@
+@import '../../styles/vars.scss';
+
+.container {
+    display: flex;
+    flex-direction: column;
+    padding: 2.5rem;
+    background-color: rgb(241 245 249);
+}
+
+.wrapper {
+    display: flex;
+    justify-content: center;
+    margin: 0 0 1.25rem 0;
+
+    .icon {
+        color: rgb(22 163 74);
+        margin: 0 1rem 0 0;
+    }
+
+    h2 {
+        font-size: 1.875rem;
+        line-height: 2.25rem;
+    }
+}
+
+.content {
+    margin: 0 0 1.25rem 0;
+    line-height: 2rem;
+}
+
+.btn_orders {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 3rem;
+    padding: 1.25rem;
+    transition: all 300ms ease-in-out;
+    border: 1px solid black;
+    font-weight: 600;
+    background-color: white;
+    cursor: pointer;
+
+    &:hover {
+        background-color: $secondary-bg-color;
+    }
+}

@@ -35,7 +35,7 @@ const OneProduct = ({ product, sizes }: OneProductProps): JSX.Element => {
     <FormProvider {...methods}>
       <div className={styles.container}>
         <Image
-          src={product?.image as string}
+          src={`${process.env.NEXT_PUBLIC_FIREBASE_BUCKET_URL as string}${product?.image as string}?alt=media`}
           alt={product?.name as string}
           width={'0'}
           height={'0'}
@@ -78,6 +78,7 @@ const OneProduct = ({ product, sizes }: OneProductProps): JSX.Element => {
             <NoProduct
               text={'No sizes'}
               center={false}
+              productPage
             />
         }
         </div>

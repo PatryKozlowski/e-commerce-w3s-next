@@ -25,7 +25,6 @@ const Header = (): JSX.Element => {
 
   const getTitle = useCallback((pathName: string) => {
     const pageName = pathName.split('/')
-    console.log(pageName[1]?.charAt(0).toUpperCase() + pageName[1]?.slice(1))
     if (pageName.length === 2) {
       return pageName[1]?.charAt(0).toUpperCase() + pageName[1]?.slice(1)
     }
@@ -33,6 +32,8 @@ const Header = (): JSX.Element => {
       return pageName[2]?.charAt(0).toUpperCase() + pageName[2]?.slice(1)
     }
   }, [])
+
+  const isPageWithID = getTitle(pathName) === '[id]'
 
   const isSearchEnable = (searchEnabledRoutes.includes(pathName.split('/')[1]) && pathName.split('/').length <= 3) || (searchEnabledRoutes.includes(pathName.split('/')[3]) && pathName.split('/').length <= 3)
   const isTitleEnable = isSearchEnable
@@ -46,13 +47,13 @@ const Header = (): JSX.Element => {
       <div className={`${isTitleEnable ? styles.wrapper : styles.wrapper_end}`}>
         {
             isTitleEnable ?
-              <p className={styles.header_title}>{getTitle(pathName)}</p>
+              <p className={styles.header_title}>{isPageWithID ? '' : getTitle(pathName)}</p>
               :
               null
         }
         <div className={styles.content}>
           {
-            isSearchEnable ?
+            isSearchEnable && !isPageWithID ?
               <Input
                 containerStyle={styles.input_container}
                 search

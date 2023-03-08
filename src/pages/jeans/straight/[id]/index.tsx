@@ -9,7 +9,10 @@ import Head from 'next/head'
 const OneJeansPage = ({ product, sizes }: OneProductProps): JSX.Element => {
   if (!product) {
     return (
-      <NoProduct text={'Product not available'}/>
+      <NoProduct
+        text={'Product not available'}
+        productPage
+      />
     )
   }
 

@@ -10,7 +10,6 @@ import Head from 'next/head'
 const ShoesPage = ({ products }: ProductsProps): JSX.Element => {
   return (
     <>
-
       <Head>
         <title>Clothes shop - Shoes</title>
         <meta
@@ -24,7 +23,7 @@ const ShoesPage = ({ products }: ProductsProps): JSX.Element => {
       </Head>
       {
         !products.length ?
-          <NoProduct />
+          <NoProduct productPage />
           :
           <Wrapper>
             <Products

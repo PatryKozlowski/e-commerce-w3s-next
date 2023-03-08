@@ -1,7 +1,10 @@
+@import '../../styles/mixins.scss';
+
 .container_center {
-    // width: 100%;
-    width: calc(100% + 15.625rem);
-    height: 50vh;
+    height: 100vh;
+    @include desktop {
+        height: 50vh;
+    }
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -23,7 +26,6 @@
 }
 
 .container {
-    width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -41,5 +43,17 @@
 
     .subtitle {
         font-weight: 300;
+    }
+}
+
+.container_center_rest_page {
+    @include desktop {
+        width: 100%;
+    }
+}
+
+.container_center_product_page {
+    @include desktop {
+        width: calc(100% + 15.625rem);
     }
 }

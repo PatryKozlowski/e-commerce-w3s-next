@@ -1,7 +1,9 @@
+@import '../../styles/mixins.scss';
+
 .container {
     display: flex;
     flex-direction: column;
-    transition: ease-in-out 300ms;
+    @include hoverAnimation;
 
     .product_info_wrapper {
         position:relative
@@ -19,6 +21,10 @@
     &:hover {
         transform: scale(1.05);
     }
+}
+
+.img_wrapper {
+
 
     img {
         width: 100%;

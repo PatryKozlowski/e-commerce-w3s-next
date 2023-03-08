@@ -39,7 +39,7 @@
 
         &:hover {
             color: $third-tex-color;
-            background-color: rgb(243 244 246);
+            background-color: $bg_container;
             transform: scale(1.05);
         }
     }

@@ -25,13 +25,15 @@ const Product = ({ id, name, price, info, image, product, jeansType }: ProductPr
           null
       }
       <Link href={product === 'jeans' ? pageWithJeansType : productPage}>
-        <Image
-          src={image}
-          alt={'Product image'}
-          width={'0'}
-          height={'0'}
-          sizes={'100vw'}
-        />
+        <div className={styles.img_wrapper}>
+          <Image
+            src={`${process.env.NEXT_PUBLIC_FIREBASE_BUCKET_URL as string}${image}?alt=media`}
+            alt={'Product image'}
+            width={'0'}
+            height={'0'}
+            sizes={'100vw'}
+          />
+        </div>
       </Link>
       <div className={styles.wrapper}>
         <p>{name}</p>

@@ -1,0 +1,41 @@
+@import '../../styles/mixins.scss';
+@import '../../styles/vars.scss';
+
+.container {
+    border: 1px solid gray;
+    border-radius: 0.375rem;
+    background-color: rgb(243 244 246);
+}
+
+.wrapper {
+    display: grid;
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+    @include mobile {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+    gap: 1rem;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    color: rgb(75 85 99);
+    padding: 1.25rem;
+}
+
+.image_container {
+    padding: 1.25rem;
+    border-top: 1px solid gray;
+    border-end-end-radius: 0.375rem;
+    border-bottom-left-radius: 0.375rem;
+    // border-radius: 0.375rem;
+    background-color: white;
+}
+
+.image_wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    flex-direction: column;
+    @include desktop {
+        flex-direction: row;
+    }
+}
