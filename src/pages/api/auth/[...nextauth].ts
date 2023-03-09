@@ -121,6 +121,10 @@ export function requestWrapper (req: NextApiRequest, res: NextApiResponse): [req
 
           if (user.password === null) return null
 
+          if (user.blocked) {
+            throw new Error('Your account is blocked')
+          }
+
           const compareHashedPassword = await compare(password, user.password)
 
           if (!compareHashedPassword || user.email !== email) {

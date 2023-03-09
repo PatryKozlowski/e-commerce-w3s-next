@@ -35,7 +35,7 @@ export default EditOnePage
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
   const session = await getSession({ ctx })
 
-  if (!session || session.user?.role !== 'admin') {
+  if (!session || session.user?.role === 'user') {
     return {
       redirect: {
         permanent: false,

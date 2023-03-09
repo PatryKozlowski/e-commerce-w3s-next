@@ -1,16 +1,16 @@
-import ProductsList from '@/components/ProductsList/ProductsList'
+import UsersList from '@/components/UsersList/UsersList'
 import Wrapper from '@/components/Wrapper/Wrapper'
-import { getProductsList } from '@/lib/services/admin/product/getProductsList'
+import { getUsers } from '@/lib/services/admin/user/getUsers'
 import { dehydrate, QueryClient } from '@tanstack/react-query'
 import type { GetServerSideProps } from 'next'
 import { getSession } from 'next-auth/react'
 import Head from 'next/head'
 
-const EditProductPage = (): JSX.Element => {
+const UsersPage = (): JSX.Element => {
   return (
     <>
       <Head>
-        <title>Clothes shop - Edit Product</title>
+        <title>Clothes shop - Edit Users</title>
         <meta
           name={'description'}
           content={'The best clothes on the world'}
@@ -21,13 +21,13 @@ const EditProductPage = (): JSX.Element => {
         />
       </Head>
       <Wrapper>
-        <ProductsList />
+        <UsersList />
       </Wrapper>
     </>
   )
 }
 
-export default EditProductPage
+export default UsersPage
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
   const session = await getSession({ ctx })
@@ -36,14 +36,14 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
     return {
       redirect: {
         permanent: false,
-        destination: '/'
+        destination: '/auth/login'
       }
     }
   }
 
   const queryClient = new QueryClient()
 
-  await queryClient.prefetchQuery(['product'], getProductsList)
+  await queryClient.prefetchQuery(['users'], getUsers)
   return {
     props: {
       props: { dehydratedState: JSON.parse(JSON.stringify(dehydrate(queryClient))) }

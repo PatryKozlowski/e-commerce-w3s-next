@@ -29,7 +29,8 @@ const checkoutSessionsHandler = async (req: NextApiRequest, res: NextApiResponse
               id: product.id,
               quantity: product.quantity,
               size: product.size,
-              image: `${process.env.NEXT_PUBLIC_FIREBASE_BUCKET_URL as string}${product.image}?alt=media`
+              // image: `${process.env.NEXT_PUBLIC_FIREBASE_BUCKET_URL as string}${product.image}?alt=media`
+              image: product.image
             })))
           }
         })

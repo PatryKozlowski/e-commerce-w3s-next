@@ -5,7 +5,7 @@ import { getSession } from 'next-auth/react'
 const createProductHandler = async (req: NextApiRequest & { [key: string]: any }, res: NextApiResponse): Promise<void> => {
   const session = await getSession({ req })
 
-  if (session?.user?.role !== 'admin' || !session) {
+  if (session?.user?.role === 'user' || !session) {
     return res.status(401).json({ message: 'Unauthorized', status: 401 })
   }
 

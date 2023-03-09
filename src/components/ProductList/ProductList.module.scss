@@ -28,6 +28,15 @@
     gap: 1.5rem;
 }
 
+.product_wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1rem;
+    border-radius: 0.375rem;
+    border: 1px solid $gray;
+}
+
 .sizes_wrapper {
     display: flex;
     flex-direction: column;
@@ -46,8 +55,11 @@
 .inline_wrapper {
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: 1rem;
-    padding: 0.125rem;
+    padding: 1rem;
+    border-radius: 0.375rem;
+    border: 1px solid $gray;
 }
 
 .sizes_p {
@@ -122,4 +134,12 @@
 	  top: 40%;
 	  left: 60%;
 	}
+}
+
+.spinner_wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
 }

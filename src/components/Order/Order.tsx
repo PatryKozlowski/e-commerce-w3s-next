@@ -4,7 +4,6 @@ import type { OrderProps } from './types'
 import styles from './Order.module.scss'
 
 const Order = ({ id, images, total, date, status, delivery, payment }: OrderProps): JSX.Element => {
-  console.log(images)
   return (
     <div className={styles.container}>
       <div className={styles.wrapper}>

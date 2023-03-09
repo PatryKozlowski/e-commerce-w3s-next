@@ -2,12 +2,19 @@
 
 .container {
     display: flex;
-    column-gap: 0.5rem;
+    align-items: center;
     border-bottom: 1px solid $violet;
 
-    p {
-        width: 50%;
+    span {
+        color: $orange;
+        margin: 0 1rem 0 0;
         padding: 0.125rem;
+
+    }
+
+    p {
+        padding: 0.125rem;
+        color: $gray;
     }
 }
 

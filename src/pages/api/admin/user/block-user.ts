@@ -2,15 +2,15 @@ import prisma from '@/lib/utils/prisma'
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { getSession } from 'next-auth/react'
 
-const deleteUserHandler = async (req: NextApiRequest, res: NextApiResponse): Promise<void> => {
+const blockUserHandler = async (req: NextApiRequest, res: NextApiResponse): Promise<void> => {
   const session = await getSession({ req })
 
   if (session?.user?.role === 'user' || !session) {
     return res.status(401).json({ message: 'Unauthorized', status: 401 })
   }
 
-  if (req.method !== 'DELETE') {
-    return res.status(405).json({ message: 'HTTP method not valid (only DELETE)', status: res.statusCode })
+  if (req.method !== 'PATCH') {
+    return res.status(405).json({ message: 'HTTP method not valid (only PATCH)', status: res.statusCode })
   }
 
   const { id: userId } = req.body
@@ -34,12 +34,12 @@ const deleteUserHandler = async (req: NextApiRequest, res: NextApiResponse): Pro
       return res.status(400).json({ message: 'User not exists', status: res.statusCode })
     }
 
-    if (isUser.id === session?.user?.id) {
-      return res.status(400).json({ message: 'You cannot delete yourself', status: res.statusCode })
+    if (isUser.role === 'admin' && session?.user?.role === 'admin') {
+      return res.status(400).json({ message: 'You cannot block an admin', status: res.statusCode })
     }
 
-    if (isUser.role === 'admin') {
-      return res.status(400).json({ message: 'You cannot delete an admin', status: res.statusCode })
+    if (isUser.id === session?.user?.id) {
+      return res.status(400).json({ message: 'You cannot block yourself', status: res.statusCode })
     }
   } catch (error) {
     if (error instanceof Error) {
@@ -62,4 +62,4 @@ const deleteUserHandler = async (req: NextApiRequest, res: NextApiResponse): Pro
     return res.status(400).json({ message: 'Something went wrong', status: res.statusCode })
   }
 }
-export default deleteUserHandler
+export default blockUserHandler

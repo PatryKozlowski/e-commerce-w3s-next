@@ -65,92 +65,105 @@ const ProductList = ({ id, jeansType, name, product, info, price, image }: Produ
     setLoadingDeleteImage(false)
   }, [mutate])
 
+  const productListInfo = [
+    { label: 'Name:', value: name },
+    { label: 'Product:', value: upperCaseFirstLetter(product) },
+    { label: 'Info:', value: upperCaseFirstLetter(info as string) },
+    { label: 'Price $:', value: price }
+
+  ]
+
   return (
-    <>
+    <div className={styles.container}>
       {
-      isLoadingDeleteProduct ?
-        <div className={styles.spinner_container}>
-          <Spinner />
-        </div>
-        :
-        <div className={styles.container}>
-          <Image
-            src={`${process.env.NEXT_PUBLIC_FIREBASE_BUCKET_URL as string}${image}?alt=media`}
-            alt={'Product image'}
-            width={205}
-            height={260}
-            className={styles.img}
-          />
-          <div className={styles.product_info_wrapper}>
-            <ProductInfoList
-              label={'Product name:'}
-              name={name}
+        isLoadingDeleteProduct ?
+          <div className={styles.spinner_container}>
+            <Spinner />
+          </div>
+          :
+          <>
+            <Image
+              src={`${process.env.NEXT_PUBLIC_FIREBASE_BUCKET_URL as string}${image}?alt=media`}
+              alt={'Product image'}
+              width={205}
+              height={260}
+              className={styles.img}
             />
-            <ProductInfoList
-              label={'Product:'}
-              name={upperCaseFirstLetter(product)}
-            />
-            <ProductInfoList
-              label={'Product info:'}
-              name={upperCaseFirstLetter(info as string)}
-            />
-            <ProductInfoList
-              label={'Product price $:'}
-              name={price}
-            />
-            <div className={styles.sizes_wrapper}>
-              <p className={styles.sizes_p}>Sizes in stock:</p>
-              <div className={styles.inline_wrapper}>
+            <div className={styles.product_info_wrapper}>
+              <h3>Product info</h3>
+              <div className={styles.product_wrapper}>
                 {
-              isLoadingProductSizes ?
-                <Spinner />
-                :
-                productSize?.length === 0 || isStockSumNull ?
-                  <div className={styles.empty_stock}>
-                    <MdProductionQuantityLimits size={26}/>
-                    <p className={styles.size_stock}>Out of stock</p>
-                  </div> :
-                  productSize?.map((size) => (
-                    <div key={size.id}>
-                      <p>{size.size}
-                      </p>
-                      <p className={styles.size_stock}>{size.stock}</p>
+                  isLoadingProductSizes ?
+                    <div className={styles.spinner_wrapper}>
+                      <Spinner />
                     </div>
-                  ))
-              }
+                    :
+                    productListInfo.map((pInfo, index) => {
+                      return (
+                        <ProductInfoList
+                          key={index}
+                          label={pInfo.label}
+                          name={pInfo.value}
+                        />
+                      )
+                    })
+                }
+              </div>
+              <div className={styles.sizes_wrapper}>
+                <h3>Stock</h3>
+                <div className={styles.inline_wrapper}>
+                  {
+                    isLoadingProductSizes ?
+                      <div className={styles.spinner_wrapper}>
+                        <Spinner />
+                      </div>
+                      :
+                      productSize?.length === 0 || isStockSumNull ?
+                        <div className={styles.empty_stock}>
+                          <MdProductionQuantityLimits size={26}/>
+                          <p className={styles.size_stock}>Out of stock</p>
+                        </div> :
+                        productSize?.map((size) => (
+                          <div key={size.id}>
+                            <p>{size.size}
+                            </p>
+                            <p className={styles.size_stock}>{size.stock}</p>
+                          </div>
+                        ))
+                    }
+                </div>
               </div>
             </div>
-          </div>
-          <div className={styles.btn_wrapper}>
-            <div
-              className={`${styles.btn_container} ${styles.gray_color}`}
-              onClick={goToProduct}
-            >
-              <button disabled={isLoadingDeleteImage || isLoadingDeleteProduct}>Show product</button>
+            <div className={styles.btn_wrapper}>
+              <div
+                className={`${styles.btn_container} ${styles.gray_color}`}
+                onClick={goToProduct}
+              >
+                <button disabled={isLoadingDeleteImage || isLoadingDeleteProduct}>Show product</button>
+              </div>
+              <div
+                className={`${styles.btn_container} ${styles.violet_color}`}
+                onClick={goToProductEditPage}
+              >
+                <button disabled={isLoadingDeleteImage || isLoadingDeleteProduct}>Edit</button>
+              </div>
+              <div
+                className={`${styles.btn_container} ${styles.red_color}`}
+              >
+                {
+                  isLoadingDeleteImage || isLoadingDeleteProduct ?
+                    <Spinner /> :
+                    <button
+                      onClick={async () => await handleDeleteProduct(image)}
+                      disabled={isLoadingDeleteImage || isLoadingDeleteProduct}
+                    >DELETE
+                    </button>
+                }
+              </div>
             </div>
-            <div
-              className={`${styles.btn_container} ${styles.violet_color}`}
-              onClick={goToProductEditPage}
-            >
-              <button disabled={isLoadingDeleteImage || isLoadingDeleteProduct}>Edit</button>
-            </div>
-            <div
-              className={`${styles.btn_container} ${styles.red_color}`}
-            >
-              {
-            isLoadingDeleteImage || isLoadingDeleteProduct ?
-              <Spinner /> :
-              <button
-                onClick={async () => await handleDeleteProduct(image)}
-                disabled={isLoadingDeleteImage || isLoadingDeleteProduct}
-              >DELETE
-              </button>
-          }
-            </div>
-          </div>
-        </div>
-        }
-    </>
+          </>
+      }
+    </div>
   )
 }
 

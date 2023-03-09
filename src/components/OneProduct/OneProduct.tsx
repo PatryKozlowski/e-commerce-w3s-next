@@ -78,7 +78,6 @@ const OneProduct = ({ product, sizes }: OneProductProps): JSX.Element => {
             <NoProduct
               text={'No sizes'}
               center={false}
-              productPage
             />
         }
         </div>

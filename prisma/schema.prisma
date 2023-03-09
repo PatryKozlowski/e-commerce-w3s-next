@@ -117,7 +117,6 @@ model Account {
   scope             String?
   id_token          String? @db.Text
   session_state     String?
-  blocked           Boolean @default(false)
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
@@ -147,6 +146,7 @@ model User {
   sessions         Session[]
   deleteToken      String?
   deletePin        String?
+  blocked           Boolean @default(false)
   createdAt        DateTime      @default(now())
   updatedAt        DateTime      @default(now())
 }
@@ -160,6 +160,7 @@ model VerificationToken {
 }
 
 enum Role {
+  master
   admin
   user
 }

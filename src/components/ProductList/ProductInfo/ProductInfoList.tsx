@@ -4,7 +4,7 @@ import type { Props } from './types'
 const ProductInfoList = ({ label, name }: Props): JSX.Element => {
   return (
     <div className={styles.container}>
-      <p>{label}</p>
+      <span>{label}</span>
       <p className={styles.name_paragraph}>{name}</p>
     </div>
   )

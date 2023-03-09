@@ -18,7 +18,8 @@ const UserMenu = (): JSX.Element => {
 
   const adminLinks = [
     { link: 'Create new product', href: '/create', admin: true },
-    { link: 'Edit product', href: '/edit/product', admin: true }
+    { link: 'Edit product', href: '/edit/product', admin: true },
+    { link: 'Users', href: '/users', admin: true }
   ]
 
   const handleCloseMenu = useCallback(() => {
@@ -43,7 +44,7 @@ const UserMenu = (): JSX.Element => {
             ))
         }
         {
-            session?.user?.role === 'admin' ?
+            session?.user?.role === 'admin' || session?.user?.role === 'master' ?
               <div
                 onClick={handleCloseMenu}
                 className={styles.admin_link_wrapper}

@@ -44,7 +44,8 @@ const webhook = async (req: NextApiRequest, res: NextApiResponse): Promise<void>
       }
     }
 
-    const updateStock = (customer: CustomerData[]): void => {
+    const updateStock = async (customer: CustomerData[]): Promise<void> => {
+      console.log('przed sieze xs')
       customer.forEach(async ({ size, quantity, id }: CustomerData) => {
         switch (size) {
           case 'XS':
@@ -257,7 +258,7 @@ const webhook = async (req: NextApiRequest, res: NextApiResponse): Promise<void>
           if (customerData instanceof Object && 'metadata' in customerData) {
             const transformedCutomerData: CustomerData[] = JSON.parse(customerData.metadata.cart)
             await createUserCartAndOrders(customerData, data, transformedCutomerData)
-            updateStock(transformedCutomerData)
+            await updateStock(transformedCutomerData)
           }
         } catch (error) {
           if (error instanceof Error) {

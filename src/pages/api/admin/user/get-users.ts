@@ -2,7 +2,7 @@ import prisma from '@/lib/utils/prisma'
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { getSession } from 'next-auth/react'
 
-const getProductsListHandler = async (req: NextApiRequest, res: NextApiResponse): Promise<void> => {
+const getUsersHandler = async (req: NextApiRequest, res: NextApiResponse): Promise<void> => {
   const session = await getSession({ req })
 
   if (session?.user?.role === 'user' || !session) {
@@ -14,22 +14,12 @@ const getProductsListHandler = async (req: NextApiRequest, res: NextApiResponse)
   }
 
   try {
-    const products = await prisma.products.findMany({
-      select: {
-        id: true,
-        jeansType: true,
-        name: true,
-        product: true,
-        info: true,
-        image: true,
-        price: true
-      }
-    })
-    return res.status(200).json(products)
+    const users = await prisma.user.findMany()
+    return res.status(200).json(users)
   } catch (error) {
     if (error instanceof Error) {
       console.log(error.message)
     }
   }
 }
-export default getProductsListHandler
+export default getUsersHandler

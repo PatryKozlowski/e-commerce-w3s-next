@@ -8,11 +8,8 @@ export const useDeleteProduct = (id: DeleteProductProps): UseMutationResult<Resp
   const queryClient = useQueryClient()
   return useMutation({
     mutationFn: async () => await deleteProduct(id),
-    onMutate: async (id: string) => {
-      await queryClient.cancelQueries({ queryKey: ['product'] })
+    onMutate: async () => {
       const prevProducts = queryClient.getQueryData(['product']) as Products[]
-      console.log('prevProducts ', prevProducts)
-      queryClient.setQueryData(['product'], prevProducts.filter((product) => product.id !== id))
       return { prevProducts }
     },
     onError: (_error, product, ctx) => {
@@ -21,12 +18,17 @@ export const useDeleteProduct = (id: DeleteProductProps): UseMutationResult<Resp
     onSettled: () => {
       void queryClient.invalidateQueries({ queryKey: ['product'] })
     },
-    onSuccess (data) {
+    onSuccess: async (data) => {
       if (data.status === 200) {
         toast.success(data.message)
       } else {
         toast.info(data.message)
       }
+      await queryClient.cancelQueries({ queryKey: ['product'] })
+      const prevProducts = queryClient.getQueryData(['product']) as Products[]
+      const productId = id as unknown as string
+      queryClient.setQueryData(['product'], prevProducts.filter((product) => product.id !== productId))
+      return { prevProducts }
     }
   })
 }
