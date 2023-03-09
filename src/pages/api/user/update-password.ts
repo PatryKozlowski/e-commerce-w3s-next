@@ -1,19 +1,24 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
-import jwt from 'jsonwebtoken'
 import { compare, hash } from 'bcrypt'
 import prisma from '@/lib/utils/prisma'
+import { getSession } from 'next-auth/react'
 
-const resetPasswordHandler = async (req: NextApiRequest, res: NextApiResponse): Promise<void> => {
+const updatePasswordHandler = async (req: NextApiRequest, res: NextApiResponse): Promise<void> => {
+  const session = await getSession({ req })
+
+  if (!session) {
+    return res.status(401).json({ message: 'Unauthorized', status: res.statusCode })
+  }
+
   if (req.method !== 'PATCH') {
     return res.status(405).json({ message: 'HTTP method not valid (only PATCH)', status: res.statusCode })
   }
 
-  const { id, token } = req.query
   const { password, repeatPassword } = req.body
 
   const saltRounds = 12
 
-  const userId = id as string
+  const userId = session.user?.id as string
 
   const isValidUser = await prisma.user.findUnique({
     where: {
@@ -33,18 +38,15 @@ const resetPasswordHandler = async (req: NextApiRequest, res: NextApiResponse): 
     return res.status(404).json({ message: 'You must specify a password', status: res.statusCode })
   }
 
+  if (password !== repeatPassword) {
+    return res.status(404).json({ message: 'Passwords not match', status: res.statusCode })
+  }
+
   if (password.length < 8 || repeatPassword.length < 8) {
     return res.status(404).json({ message: 'Password must be longer than 8 characters', status: res.statusCode })
   }
 
-  const JWT_SECRET = process.env.JWT_SECRET as string
-
-  const queryToken = token as string
-  const secret = `${String(JWT_SECRET)}${String(isValidUser?.password)}`
-
   try {
-    jwt.verify(queryToken, secret)
-
     const oldUserPassword = isValidUser?.password as string
 
     const compareHashedPassword = await compare(password, oldUserPassword)
@@ -74,4 +76,4 @@ const resetPasswordHandler = async (req: NextApiRequest, res: NextApiResponse): 
   }
 }
 
-export default resetPasswordHandler
+export default updatePasswordHandler

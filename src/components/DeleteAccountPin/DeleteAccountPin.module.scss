@@ -1,0 +1,47 @@
+@import '../../styles/mixins.scss';
+@import '../../styles/vars.scss';
+
+.container {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+}
+
+.pin_input {
+    width: 3.125rem;
+    height: 3.125rem;
+    text-align: center;
+    &::-webkit-outer-spin-button,
+    &::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+    }
+
+    &:focus {
+        outline-color: $violet;
+    }
+}
+
+.spinner_wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.btn_delete {
+    width: 83.333333%;
+    padding: 1.25rem;
+    background-color: $error;
+    font-weight: 600;
+    @include desktop {
+        width: 100%;
+    }
+    gap: 0.5rem;
+    border: 2px solid black;
+    @include hoverAnimation;
+    cursor: pointer;
+
+    &:hover {
+        background-color: $secondary-text-color;
+    }
+}

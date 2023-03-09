@@ -10,7 +10,6 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-
 enum JeansType {
   normal
   skinny
@@ -34,7 +33,6 @@ enum ProductType {
   blazers
   shoes
 }
-
 
 model SizeXS {
   id        String   @id @unique @default(uuid())
@@ -88,9 +86,9 @@ model SizeXL {
 
 model Products {
   id          String       @id @default(uuid())
-  product     ProductType @default(null)
-  name        String @db.VarChar(29)
-  description String @db.VarChar(264)
+  product     ProductType  @default(null)
+  name        String       @db.VarChar(29)
+  description String       @db.VarChar(264)
   image       String
   price       Float
   jeansType   JeansType?   @default(normal)
@@ -106,13 +104,12 @@ model Products {
   @@unique([id])
 }
 
-
 model Account {
   id                String  @id @default(cuid())
   userId            String
-  type              String
-  provider          String
-  providerAccountId String
+  type              String?
+  provider          String?
+  providerAccountId String?
   refresh_token     String? @db.Text
   access_token      String? @db.Text
   expires_at        Int?
@@ -120,7 +117,7 @@ model Account {
   scope             String?
   id_token          String? @db.Text
   session_state     String?
-  blocked           Boolean @default(false)       
+  blocked           Boolean @default(false)
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
@@ -148,8 +145,10 @@ model User {
   orders           UsersOrders[]
   accounts         Account[]
   sessions         Session[]
-  createdAt DateTime    @default(now())
-  updatedAt DateTime     @default(now())
+  deleteToken      String?
+  deletePin        String?
+  createdAt        DateTime      @default(now())
+  updatedAt        DateTime      @default(now())
 }
 
 model VerificationToken {
@@ -186,14 +185,14 @@ enum DeliveryStatus {
 }
 
 model UsersAdress {
-  id          String   @id @default(cuid())
-  userId      String   @unique
-  name        String
-  street      String
-  city        String
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @default(now())
-  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  id        String   @id @default(cuid())
+  userId    String   @unique
+  name      String
+  street    String
+  city      String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now())
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 model UsersOrders {

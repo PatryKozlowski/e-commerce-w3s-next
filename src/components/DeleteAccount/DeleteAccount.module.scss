@@ -1,0 +1,79 @@
+@import '../../styles/mixins.scss';
+@import '../../styles/vars.scss';
+
+.form_wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+    padding: 1rem;
+    
+    h2 {
+        font-size: 1.5rem;
+        line-height: 2rem;
+        // margin: 0 0 1rem 0;
+        // padding: 0 0 0 1rem;
+        @include desktop {
+            padding: 0;
+        }
+    }
+}
+
+.wrapper {
+    border-bottom: 2px solid black;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.btn_reload {
+    padding: 0.2rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+
+    @include hoverAnimation;
+
+    &:hover {
+        transform: scale(1.1);
+    }
+}
+
+.spinner_wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.info {
+    font-weight: 500;
+    color: $error;
+    text-align: center;
+}
+
+.response_message {
+    color: $success;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+
+.btn_send_pin {
+    width: 83.333333%;
+    padding: 1.25rem;
+    @include desktop {
+        width: 100%;
+    }
+    gap: 0.5rem;
+    border: 2px solid black;
+    @include hoverAnimation;
+    cursor: pointer;
+
+    &:hover {
+        background-color: $secondary-text-color;
+    }
+}

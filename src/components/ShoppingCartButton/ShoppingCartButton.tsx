@@ -8,7 +8,7 @@ import styles from './ShoppingCartButton.module.scss'
 const ShoppingCartButton = (): JSX.Element => {
   const [isAnimated, setAnimated] = useState(false)
   const dispatch = useAppDispatch()
-  const items = useAppSelector((state) => state.cart.productsInCart)
+  const items = useAppSelector((state) => state.cart.productsInCart) ?? 0
   const isOpen = useAppSelector((state) => state.cart.isCartOpen)
 
   const handleOpenCart = useCallback(() => {

@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from 'react'
-import { FormProvider, SubmitHandler, useForm } from 'react-hook-form'
+import { SubmitHandler, useForm } from 'react-hook-form'
 import Input from '../Input/Input'
 import Spinner from '../Spinner/Spinner'
 import Textarea from '../Textarea/Textarea'
@@ -73,7 +73,7 @@ const EditProduct = ({ product, sizes }: ProductEditProps): JSX.Element => {
   const nameLength = watch('productName')?.length
   const descLength = watch('productDesc')?.length
 
-  const handleCreate: SubmitHandler<EditProdutForm> = useCallback(async (FormData) => {
+  const handleUpdate: SubmitHandler<EditProdutForm> = useCallback(async (FormData) => {
     const response = await mutateAsync(FormData)
 
     if (response.status === 200) {
@@ -131,56 +131,53 @@ const EditProduct = ({ product, sizes }: ProductEditProps): JSX.Element => {
   }, [])
 
   return (
-    <FormProvider {...methods}>
-      <form
-        onSubmit={handleSubmit(handleCreate)}
-        className={styles.form_wrapper}
-      >
-        <h2>
-          Edit product
-        </h2>
-        <div className={styles.grid_wrapper}>
-          <Image
-            src={`${process.env.NEXT_PUBLIC_FIREBASE_BUCKET_URL as string}${product?.image as string}?alt=media`}
-            alt={product?.name as string}
-            width={'0'}
-            height={'0'}
-            sizes={'100vw'}
-          />
-          <div className={styles.product_wrapper}>
-            <div className={styles.input_wrapper}>
-              <div className={styles.icon_wrapper}>
-                <p className={styles.title_header}>Product name </p>
-                <FiEdit
-                  className={`${isEnabled?.productName ? styles.enabled : ''}`}
-                  onClick={() => handleEnabled('productName')}
-                />
-              </div>
-              {
-                isEnabled?.productName ?
-                  <>
-                    <Input
-                      placeholder={''}
-                      isError={errors?.productName}
-                      errorMessage={errors?.productName?.message}
-                      maxlength={29}
-                      {...registeredName}
-                    />
-                    <span>{nameLength}/29</span>
-                  </>
-                  :
-                  <p className={`${styles.title} ${isSameName ? '' : styles.changed}`}>{isSameName ? product?.name : getValues('productName')}</p>
-              }
+    <form
+      onSubmit={handleSubmit(handleUpdate)}
+      className={styles.form_wrapper}
+    >
+      <h2>Edit product</h2>
+      <div className={styles.grid_wrapper}>
+        <Image
+          src={`${process.env.NEXT_PUBLIC_FIREBASE_BUCKET_URL as string}${product?.image as string}?alt=media`}
+          alt={product?.name as string}
+          width={'0'}
+          height={'0'}
+          sizes={'100vw'}
+        />
+        <div className={styles.product_wrapper}>
+          <div className={styles.input_wrapper}>
+            <div className={styles.icon_wrapper}>
+              <p className={styles.title_header}>Product name </p>
+              <FiEdit
+                className={`${isEnabled?.productName ? styles.enabled : ''}`}
+                onClick={() => handleEnabled('productName')}
+              />
             </div>
-            <div className={styles.input_wrapper}>
-              <div className={styles.icon_wrapper}>
-                <p className={styles.title_header}>Product description</p>
-                <FiEdit
-                  className={`${isEnabled?.productDesc ? styles.enabled : ''}`}
-                  onClick={() => handleEnabled('productDesc')}
-                />
-              </div>
-              {
+            {
+              isEnabled?.productName ?
+                <>
+                  <Input
+                    placeholder={''}
+                    isError={errors?.productName}
+                    errorMessage={errors?.productName?.message}
+                    maxlength={29}
+                    {...registeredName}
+                  />
+                  <span>{nameLength}/29</span>
+                </>
+                :
+                <p className={`${styles.title} ${isSameName ? '' : styles.changed}`}>{isSameName ? product?.name : getValues('productName')}</p>
+            }
+          </div>
+          <div className={styles.input_wrapper}>
+            <div className={styles.icon_wrapper}>
+              <p className={styles.title_header}>Product description</p>
+              <FiEdit
+                className={`${isEnabled?.productDesc ? styles.enabled : ''}`}
+                onClick={() => handleEnabled('productDesc')}
+              />
+            </div>
+            {
                 isEnabled?.productDesc ?
                   <>
                     <Textarea
@@ -195,18 +192,18 @@ const EditProduct = ({ product, sizes }: ProductEditProps): JSX.Element => {
                   :
                   <p className={`${styles.description} ${isSameDesc ? '' : styles.changed}`}>{isSameDesc ? product?.description : getValues('productDesc')}</p>
               }
+          </div>
+          <>
+            <div className={styles.icon_wrapper}>
+              <p className={styles.title_header}>Product sizes </p>
+              <FiEdit
+                className={`${isEnabled?.productSize ? styles.enabled : ''}`}
+                onClick={() => handleEnabled('productSize')}
+              />
             </div>
-            <>
-              <div className={styles.icon_wrapper}>
-                <p className={styles.title_header}>Product sizes </p>
-                <FiEdit
-                  className={`${isEnabled?.productSize ? styles.enabled : ''}`}
-                  onClick={() => handleEnabled('productSize')}
-                />
-              </div>
-            </>
-            <div className={styles.sizes_wrapper}>
-              {
+          </>
+          <div className={styles.sizes_wrapper}>
+            {
                   isEnabled?.productSize || sizes.length === 0 ?
                     productSizes.map(({ name, registeredInput }, index) => (
                       <div
@@ -230,16 +227,16 @@ const EditProduct = ({ product, sizes }: ProductEditProps): JSX.Element => {
                       </div>
                     ))
                 }
+          </div>
+          <div className={styles.product_price}>
+            <div className={styles.icon_wrapper}>
+              <p className={styles.title_header}>Product price</p>
+              <FiEdit
+                className={`${isEnabled?.productPrice ? styles.enabled : ''}`}
+                onClick={() => handleEnabled('productPrice')}
+              />
             </div>
-            <div className={styles.product_price}>
-              <div className={styles.icon_wrapper}>
-                <p className={styles.title_header}>Product price</p>
-                <FiEdit
-                  className={`${isEnabled?.productPrice ? styles.enabled : ''}`}
-                  onClick={() => handleEnabled('productPrice')}
-                />
-              </div>
-              {
+            {
                 isEnabled?.productPrice ?
                   <Input
                     isError={errors?.productPrice}
@@ -250,17 +247,16 @@ const EditProduct = ({ product, sizes }: ProductEditProps): JSX.Element => {
                   <p className={`${isSamePrice ? '' : styles.changed}`}>$ {isSamePrice ? product?.price : getValues('productPrice')}</p>
               }
 
-            </div>
           </div>
         </div>
-        <button
-          className={`${styles.edit_btn}`}
-          disabled={isDisabed || isLoading}
-        >
-          {isLoading ? <Spinner /> : 'Edit product'}
-        </button>
-      </form>
-    </FormProvider>
+      </div>
+      <button
+        className={`${styles.edit_btn}`}
+        disabled={isDisabed || isLoading}
+      >
+        {isLoading ? <Spinner /> : 'Edit product'}
+      </button>
+    </form>
   )
 }
 

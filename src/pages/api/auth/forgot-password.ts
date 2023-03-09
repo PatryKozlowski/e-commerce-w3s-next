@@ -10,7 +10,7 @@ interface Payload {
 
 const forgotPasswordHandler = async (req: NextApiRequest, res: NextApiResponse): Promise<void> => {
   if (req.method !== 'POST') {
-    return res.status(405).json({ message: 'HTTP method not valid (only POST)' })
+    return res.status(405).json({ message: 'HTTP method not valid (only POST)', status: res.statusCode })
   }
 
   const { email } = req.body
@@ -20,7 +20,7 @@ const forgotPasswordHandler = async (req: NextApiRequest, res: NextApiResponse):
   })
 
   if (!user) {
-    return res.status(404).json({ message: 'User not found', status: 404 })
+    return res.status(404).json({ message: 'User not found', status: res.statusCode })
   }
 
   const { id, password } = user
@@ -35,7 +35,7 @@ const forgotPasswordHandler = async (req: NextApiRequest, res: NextApiResponse):
 
   const token = jwt.sign(payload, secret, { expiresIn: '5m' })
 
-  const resetPasswordURL = `${process.env.NEXT_PUBLIC_API_URL as string}/auth/forgot-password/${id as string}/${token}`
+  const resetPasswordURL = `${process.env.NEXT_PUBLIC_API_URL as string}/auth/forgot-password/${id}/${token}`
 
   const mailData = {
     from: process.env.EMAIL_USER_SERVICE as string,
@@ -47,10 +47,10 @@ const forgotPasswordHandler = async (req: NextApiRequest, res: NextApiResponse):
 
   try {
     await transporter.sendMail(mailData)
-    return res.status(200).json({ message: 'Password reset link has been sent to your email', status: 200 })
+    return res.status(200).json({ message: 'Password reset link has been sent to your email', status: res.statusCode })
   } catch (error) {
     console.error(error)
-    return res.status(500).json({ message: 'Error occurred during sending email', status: 500 })
+    return res.status(500).json({ message: 'Error occurred during sending email', status: res.statusCode })
   }
 }
 

@@ -56,12 +56,12 @@ const OneProduct = ({ product, sizes }: OneProductProps): JSX.Element => {
                 className={`${sizes.length >= 5 ? styles.form_wrapper_all_sizes : styles.form_wrapper}`}
               >
                 {
-                sizes.map((size) => (
-                  <Size
-                    key={size.id}
-                    {...size}
-                  />
-                ))
+                  sizes.map((size) => (
+                    <Size
+                      key={size.id}
+                      {...size}
+                    />
+                  ))
                 }
                 <div className={styles.button_wrapper}>
                   <button className={styles.btn_add_cart}>
