@@ -1,12 +1,14 @@
 @import '../../styles//mixins.scss';
 @import '../../styles/vars.scss';
-
+@import '../../styles/mixins.scss';
 .container {
     display: flex;
     flex-direction: column;
     align-items: center;
-    height: 50vh;
-    width: calc(100% + 15.625rem);
+    @include desktop{
+        height: 50vh;
+        width: calc(100% + 15.625rem);
+    }
 }
 
 .form_wrapper {

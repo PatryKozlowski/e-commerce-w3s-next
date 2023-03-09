@@ -23,13 +23,13 @@ export default function Home (): JSX.Element {
           href={'/favicon.ico'}
         />
       </Head>
-      <Wrapper>
+      <Wrapper homePage>
         <Banner />
       </Wrapper>
-      <Wrapper>
+      <Wrapper homePage>
         <Subscribe />
       </Wrapper>
-      <Wrapper>
+      <Wrapper homePage>
         <Contact />
       </Wrapper>
       <Footer />
