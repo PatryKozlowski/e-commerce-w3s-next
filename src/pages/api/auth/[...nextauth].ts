@@ -31,18 +31,19 @@ export function requestWrapper (req: NextApiRequest, res: NextApiResponse): [req
     adapter,
     callbacks: {
       async session ({ session, user }) {
+        console.log('session ', session)
+        console.log('user ', user)
         if (session.user) {
           session.user.id = user.id
-          const userRole = await prisma.user.findUnique({
-            where: {
-              id: user.id
-            }
-          })
-          session.user.role = userRole?.role as string
+          const role = user.role as string
+          session.user.role = role
+
+          console.log(role)
         }
         return session
       },
       async signIn ({ user, account, profile, email, credentials }) {
+        console.log('signin ', user)
         if (
           req.query.nextauth?.includes('callback') &&
           req.query.nextauth?.includes('credentials') &&
