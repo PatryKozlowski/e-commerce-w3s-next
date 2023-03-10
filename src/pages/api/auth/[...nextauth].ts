@@ -8,7 +8,9 @@ import type { NextAuthOptions, Session } from 'next-auth'
 import { decode, encode } from 'next-auth/jwt'
 import NextAuth from 'next-auth/next'
 import { compare } from 'bcrypt'
-import prisma from '@/lib/utils/prisma'
+import { PrismaClient } from '@prisma/client'
+
+const prisma = new PrismaClient()
 
 export const authHandler = async (req: NextApiRequest, res: NextApiResponse): Promise<Session> => {
   const data = requestWrapper(req, res)
@@ -25,6 +27,7 @@ export function requestWrapper (req: NextApiRequest, res: NextApiResponse): [req
   const fromDate = (time: number, date = Date.now()): Date => new Date(date + time * 1000)
 
   const options: NextAuthOptions = {
+    debug: true,
     adapter,
     callbacks: {
       async session ({ session, user }) {
