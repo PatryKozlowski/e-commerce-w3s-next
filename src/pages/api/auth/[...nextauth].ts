@@ -98,6 +98,9 @@ export function requestWrapper (req: NextApiRequest, res: NextApiResponse): [req
       }
     },
     secret: process.env.NEXTAUTH_SECRET,
+    session: {
+      strategy: 'database'
+    },
     providers: [
       GoogleProvider({
         clientId: process.env.GOOGLE_CLIENT_ID as string,
@@ -112,7 +115,7 @@ export function requestWrapper (req: NextApiRequest, res: NextApiResponse): [req
             password: string
           }
 
-          const user = await prisma.user.findUnique({
+          const user = await prisma.user.findFirst({
             where: {
               email
             }
