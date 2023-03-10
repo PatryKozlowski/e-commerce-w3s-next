@@ -94,7 +94,7 @@ export function requestWrapper (req: NextApiRequest, res: NextApiResponse): [req
         return await decode({ token, secret })
       }
     },
-    secret: process.env.JWT_SECRET,
+    secret: process.env.NEXTAUTH_SECRET,
     providers: [
       GoogleProvider({
         clientId: process.env.GOOGLE_CLIENT_ID as string,
