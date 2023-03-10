@@ -86,7 +86,7 @@ const UserChangePassword = (): JSX.Element => {
               disabled={isLoading}
               className={styles.btn_change}
             >
-              Recovery Password
+              Change Password
               <GrPowerReset />
             </button>
           </>

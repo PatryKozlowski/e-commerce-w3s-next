@@ -28,7 +28,10 @@
     @include hoverAnimation;
     font-size: 1.125rem;
     line-height: 1.75rem;
-    color: black;
+    @include desktop {
+        color: black;
+    }
+    color: white;
 }
 
 .is_animated {
@@ -44,6 +47,5 @@
     @include desktop {
         color: black;
     }
-
     color: white;
 }

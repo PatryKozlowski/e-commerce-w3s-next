@@ -129,9 +129,9 @@ export function requestWrapper (req: NextApiRequest, res: NextApiResponse): [req
 
           if (!compareHashedPassword || user.email !== email) {
             throw new Error('Email or password doesnt match')
-          } else {
-            return user
           }
+
+          return user
         }
       })
     ]

@@ -41,5 +41,5 @@ This app uses Firebase Storage as a bucket for product images and Supabase as a 
 ## 💾 Environment Variables
 
 To run this project, you will need to add the following environment variables to your .env file
-All the necessary environment variables you will find in `.env_schema`
+All the necessary environment variables you will find in `.env_example`
 
