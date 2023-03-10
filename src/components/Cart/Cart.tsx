@@ -94,6 +94,7 @@ const Cart = (): JSX.Element => {
               <NoProduct
                 text={'Your shopping cart is empty'}
                 subtext={'Go ahead! Buy something'}
+                center
               />
         }
       </div>
