@@ -65,6 +65,8 @@ export function requestWrapper (req: NextApiRequest, res: NextApiResponse): [req
             cookies.set('next-auth.session-token', sessionToken, {
               expires: sessionExpiry
             })
+
+            await adapter.getSessionAndUser(sessionToken)
           }
         }
 
