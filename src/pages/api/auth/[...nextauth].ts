@@ -8,9 +8,7 @@ import type { NextAuthOptions, Session } from 'next-auth'
 import { decode, encode } from 'next-auth/jwt'
 import NextAuth from 'next-auth/next'
 import { compare } from 'bcrypt'
-import { PrismaClient } from '@prisma/client'
-
-const prisma = new PrismaClient()
+import prisma from '@/lib/utils/prisma'
 
 export const authHandler = async (req: NextApiRequest, res: NextApiResponse): Promise<Session> => {
   const data = requestWrapper(req, res)
@@ -27,23 +25,17 @@ export function requestWrapper (req: NextApiRequest, res: NextApiResponse): [req
   const fromDate = (time: number, date = Date.now()): Date => new Date(date + time * 1000)
 
   const options: NextAuthOptions = {
-    debug: true,
     adapter,
     callbacks: {
       async session ({ session, user }) {
-        console.log('session ', session)
-        console.log('user ', user)
         if (session.user) {
           session.user.id = user.id
           const role = user.role as string
           session.user.role = role
-
-          console.log(role)
         }
         return session
       },
       async signIn ({ user, account, profile, email, credentials }) {
-        console.log('signin ', user)
         if (
           req.query.nextauth?.includes('callback') &&
           req.query.nextauth?.includes('credentials') &&
@@ -65,8 +57,6 @@ export function requestWrapper (req: NextApiRequest, res: NextApiResponse): [req
             cookies.set('next-auth.session-token', sessionToken, {
               expires: sessionExpiry
             })
-
-            await adapter.getSessionAndUser(sessionToken)
           }
         }
 

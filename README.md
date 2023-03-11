@@ -5,6 +5,10 @@ This app uses Firebase Storage as a bucket for product images and Supabase as a 
 
 ![App Screenshot](https://www.w3schools.com/w3css/img_temp_clothing_store.jpg)
 
+# ❗️ Info
+
+NextAuth doesn't support logging in with credentials and storing sessions in the database. `[... nextauth]` includes a fix that allows for session storage in the database. This fix is working on the development server, but there are some issues with sessions on the production server.
+
 # 🔗 Links
 
 ## [Template (w3schools)](https://www.w3schools.com/w3css/tryw3css_templates_clothing_store.htm)
@@ -28,6 +32,8 @@ This app uses Firebase Storage as a bucket for product images and Supabase as a 
 ![Create product](https://i.ibb.co/pxWJnS2/create-products.png)
 ![Edit product](https://i.ibb.co/bQMmCTv/edit-product.png)
 ![Cart](https://i.ibb.co/Tv9ncMX/Zrzut-ekranu-2023-03-10-o-09-10-34.png)
+![Users](https://i.ibb.co/YfgkjDL/Zrzut-ekranu-2023-03-11-o-12-24-29.png)
+![Checkout](https://i.ibb.co/dfyNyhf/Zrzut-ekranu-2023-03-11-o-12-28-14.png)
 
 # ⚙️ Features
 - Adding and editing products
