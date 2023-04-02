@@ -27,7 +27,10 @@ export const config = {
   }
 }
 
-const webhook = async (req: NextApiRequest, res: NextApiResponse): Promise<void> => {
+const webhook = async (
+  req: NextApiRequest,
+  res: NextApiResponse
+): Promise<void> => {
   if (req.method === 'POST') {
     const requestBuffer = await buffer(req)
     const payload = requestBuffer.toString()
@@ -58,7 +61,8 @@ const webhook = async (req: NextApiRequest, res: NextApiResponse): Promise<void>
 
               const quantityOfProductInStock = productId?.stock ?? 0
 
-              const newQuantityOfProductInStock = quantityOfProductInStock - quantity
+              const newQuantityOfProductInStock =
+                quantityOfProductInStock - quantity
               await prisma.sizeXS.update({
                 where: {
                   productId: id
@@ -69,7 +73,10 @@ const webhook = async (req: NextApiRequest, res: NextApiResponse): Promise<void>
               })
             } catch (error) {
               if (error instanceof Error) {
-                return res.status(500).json({ message: error.message ?? 'Update size XS error occured', satus: 500 })
+                return res.status(500).json({
+                  message: error.message ?? 'Update size XS error occured',
+                  satus: 500
+                })
               } else {
                 console.log('Unexpected error', error)
               }
@@ -86,7 +93,8 @@ const webhook = async (req: NextApiRequest, res: NextApiResponse): Promise<void>
 
               const quantityOfProductInStock = productId?.stock ?? 0
 
-              const newQuantityOfProductInStock = quantityOfProductInStock - quantity
+              const newQuantityOfProductInStock =
+                quantityOfProductInStock - quantity
               await prisma.sizeS.update({
                 where: {
                   productId: id
@@ -97,7 +105,10 @@ const webhook = async (req: NextApiRequest, res: NextApiResponse): Promise<void>
               })
             } catch (error) {
               if (error instanceof Error) {
-                return res.status(500).json({ message: error.message ?? 'Update size S error occured', satus: 500 })
+                return res.status(500).json({
+                  message: error.message ?? 'Update size S error occured',
+                  satus: 500
+                })
               } else {
                 console.log('Unexpected error', error)
               }
@@ -114,7 +125,8 @@ const webhook = async (req: NextApiRequest, res: NextApiResponse): Promise<void>
 
               const quantityOfProductInStock = productId?.stock ?? 0
 
-              const newQuantityOfProductInStock = quantityOfProductInStock - quantity
+              const newQuantityOfProductInStock =
+                quantityOfProductInStock - quantity
               await prisma.sizeM.update({
                 where: {
                   productId: id
@@ -125,7 +137,10 @@ const webhook = async (req: NextApiRequest, res: NextApiResponse): Promise<void>
               })
             } catch (error) {
               if (error instanceof Error) {
-                return res.status(500).json({ message: error.message ?? 'Update size M error occured', satus: 500 })
+                return res.status(500).json({
+                  message: error.message ?? 'Update size M error occured',
+                  satus: 500
+                })
               } else {
                 console.log('Unexpected error', error)
               }
@@ -142,7 +157,8 @@ const webhook = async (req: NextApiRequest, res: NextApiResponse): Promise<void>
 
               const quantityOfProductInStock = productId?.stock ?? 0
 
-              const newQuantityOfProductInStock = quantityOfProductInStock - quantity
+              const newQuantityOfProductInStock =
+                quantityOfProductInStock - quantity
               await prisma.sizeL.update({
                 where: {
                   productId: id
@@ -153,7 +169,10 @@ const webhook = async (req: NextApiRequest, res: NextApiResponse): Promise<void>
               })
             } catch (error) {
               if (error instanceof Error) {
-                return res.status(500).json({ message: error.message ?? 'Update size L error occured', satus: 500 })
+                return res.status(500).json({
+                  message: error.message ?? 'Update size L error occured',
+                  satus: 500
+                })
               } else {
                 console.log('Unexpected error', error)
               }
@@ -170,7 +189,8 @@ const webhook = async (req: NextApiRequest, res: NextApiResponse): Promise<void>
 
               const quantityOfProductInStock = productId?.stock ?? 0
 
-              const newQuantityOfProductInStock = quantityOfProductInStock - quantity
+              const newQuantityOfProductInStock =
+                quantityOfProductInStock - quantity
               await prisma.sizeXL.update({
                 where: {
                   productId: id
@@ -181,7 +201,10 @@ const webhook = async (req: NextApiRequest, res: NextApiResponse): Promise<void>
               })
             } catch (error) {
               if (error instanceof Error) {
-                return res.status(500).json({ message: error.message ?? 'Update size XL error occured', satus: 500 })
+                return res.status(500).json({
+                  message: error.message ?? 'Update size XL error occured',
+                  satus: 500
+                })
               } else {
                 console.log('Unexpected error', error)
               }
@@ -195,7 +218,11 @@ const webhook = async (req: NextApiRequest, res: NextApiResponse): Promise<void>
       })
     }
 
-    const createUserCartAndOrders = async (customerData: Stripe.Customer, data: EventDataCustomer, transformedCutomerData: CustomerData[]): Promise<void> => {
+    const createUserCartAndOrders = async (
+      customerData: Stripe.Customer,
+      data: EventDataCustomer,
+      transformedCutomerData: CustomerData[]
+    ): Promise<void> => {
       try {
         await prisma.usersOrders.create({
           data: {
@@ -206,7 +233,9 @@ const webhook = async (req: NextApiRequest, res: NextApiResponse): Promise<void>
         })
       } catch (error) {
         if (error instanceof Error) {
-          return res.status(500).json({ message: 'Error during user order creation', satus: 500 })
+          return res
+            .status(500)
+            .json({ message: 'Error during user order creation', satus: 500 })
         } else {
           console.log('Unexpected error', error)
         }
@@ -228,7 +257,9 @@ const webhook = async (req: NextApiRequest, res: NextApiResponse): Promise<void>
         })
       } catch (error) {
         if (error instanceof Error) {
-          return res.status(500).json({ message: 'Error during user cart creation', satus: 500 })
+          return res
+            .status(500)
+            .json({ message: 'Error during user cart creation', satus: 500 })
         } else {
           console.log('Unexpected error', error)
         }
@@ -245,24 +276,36 @@ const webhook = async (req: NextApiRequest, res: NextApiResponse): Promise<void>
       } else {
         console.log('Unexpected error', error)
       }
-      return res.status(400).json({ message: 'Webhook signature verification failed', satus: 400 })
+      return res
+        .status(400)
+        .json({ message: 'Webhook signature verification failed', satus: 400 })
     }
 
     switch (event.type) {
-      case 'checkout.session.completed':
-      {
+      case 'checkout.session.completed': {
         const data = event?.data?.object as EventDataCustomer
 
         try {
-          const customerData: Stripe.Customer | Stripe.DeletedCustomer = await stripe.customers.retrieve(data.customer)
+          const customerData: Stripe.Customer | Stripe.DeletedCustomer =
+            await stripe.customers.retrieve(data.customer)
           if (customerData instanceof Object && 'metadata' in customerData) {
-            const transformedCutomerData: CustomerData[] = JSON.parse(customerData.metadata.cart)
-            await createUserCartAndOrders(customerData, data, transformedCutomerData)
+            const transformedCutomerData: CustomerData[] = JSON.parse(
+              customerData.metadata.cart
+            )
+            await createUserCartAndOrders(
+              customerData,
+              data,
+              transformedCutomerData
+            )
             await updateStock(transformedCutomerData)
           }
         } catch (error) {
           if (error instanceof Error) {
-            return res.status(500).json({ message: error.message ?? 'Stripe customer retrieve error occured', satus: 500 })
+            return res.status(500).json({
+              message:
+                error.message ?? 'Stripe customer retrieve error occured',
+              satus: 500
+            })
           } else {
             console.log('Unexpected error', error)
           }
@@ -274,7 +317,9 @@ const webhook = async (req: NextApiRequest, res: NextApiResponse): Promise<void>
         console.log(`Unhandled event type ${event.type}`)
     }
   } else {
-    return res.status(405).json({ message: 'HTTP method not valid (only POST)', satus: 405 })
+    return res
+      .status(405)
+      .json({ message: 'HTTP method not valid (only POST)', satus: 405 })
   }
 }
 

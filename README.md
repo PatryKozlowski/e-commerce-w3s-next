@@ -13,7 +13,7 @@ NextAuth doesn't support logging in with credentials and storing sessions in the
 
 ## [Template (w3schools)](https://www.w3schools.com/w3css/tryw3css_templates_clothing_store.htm)
 
-## [Live project](https://e-commerce-w3s.vercel.app/)
+## [Live project](http://shop.kozlowskip.pl/)
 
 # 🛠 Stack
 ### 👉 [Next.js](https://nextjs.org/)
@@ -43,6 +43,14 @@ NextAuth doesn't support logging in with credentials and storing sessions in the
 - Orders list
 - Log in with Google
 - Log in with credentials
+
+# 💳 Stripe
+
+Test mode card
+Card information
+`4242 4242 4242 4242`
+CVC
+`222`
 
 ## 💾 Environment Variables
 
